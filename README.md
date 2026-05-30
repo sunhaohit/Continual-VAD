@@ -58,15 +58,13 @@ conda env list
 
 ## Datasets
 
-This repository evaluates on prepared ShanghaiTech and UCF-Crime feature files. Dataset download links will be added before release.
+This repository evaluates on prepared ShanghaiTech and UCF-Crime feature files. The released feature dataset is provided as `ContinualVAD_Dataset` and can be used directly with the evaluation scripts.
 
 | Dataset | Link |
 | --- | --- |
-| ShanghaiTech Campus | To be added |
-| UCF-Crime | To be added |
-| Pre-extracted features and DIL split files | To be added |
+| ContinualVAD_Dataset | [Quark Drive](https://pan.quark.cn/s/4e69ca3d4d68) |
 
-After preparing the data, set the following environment variables before running evaluation:
+After downloading the prepared features, set the following environment variables before running evaluation:
 
 | Variable | Description |
 | --- | --- |
@@ -82,13 +80,15 @@ After preparing the data, set the following environment variables before running
 Example:
 
 ```bash
-export SH_ROOT=/path/to/shanghaitech
-export SH_DIL_ROOT=/path/to/shanghaitech_dil
-export SH_FULL_TRAIN=/path/to/shanghaitech/train_full.npy
+export DATA_ROOT=/path/to/ContinualVAD_Dataset
 
-export UCF_ROOT=/path/to/ucf-crime
-export UCF_DIL_ROOT=/path/to/ucf-crime_dil
-export UCF_FULL_TRAIN=/path/to/ucf-crime/train_full.npy
+export SH_ROOT=${DATA_ROOT}/ShanghaiTech
+export SH_DIL_ROOT=${DATA_ROOT}/ShanghaiTech/continual_split
+export SH_FULL_TRAIN=${DATA_ROOT}/ShanghaiTech/full_train.npy
+
+export UCF_ROOT=${DATA_ROOT}/UCF-Crime
+export UCF_DIL_ROOT=${DATA_ROOT}/UCF-Crime/continual_split
+export UCF_FULL_TRAIN=${DATA_ROOT}/UCF-Crime/full_train.npy
 ```
 
 Each DIL split root should contain the global test feature and ground-truth files required by `run_eval.sh`:
@@ -179,17 +179,19 @@ The JSON and CSV files contain the same metric fields printed in the terminal.
 
 - This is a test-only repository. Training code is not included in this release.
 - No private paths are required by the code. Configure all data and checkpoint locations through environment variables.
-- Dataset links and citation information will be updated before the public release.
+- The prepared feature dataset is released as `ContinualVAD_Dataset`; configure local paths through environment variables.
 
 ## Citation
 
 If you find this repository useful, please cite the Continual VAD paper.
 
 ```bibtex
-@article{Continual VAD,
+@article{continualvad2026,
   title={Continual VAD: Memory-Driven Generative Replay and Dynamic Expansion for Cross-Scene Video Anomaly Detection},
   author={Anonymous},
   journal={arXiv preprint},
   year={2026}
 }
 ```
+
+
